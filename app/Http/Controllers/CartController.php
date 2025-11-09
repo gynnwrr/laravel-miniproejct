@@ -31,8 +31,9 @@ class CartController extends Controller
         }
 
         session()->put('cart', $cart);
+        session()->flash('cart_added', true);
 
-        return redirect()->route('cart.show');
+        return redirect()->back();
     }
 
     // Show cart contents
