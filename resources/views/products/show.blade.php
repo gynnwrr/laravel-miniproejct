@@ -3,6 +3,19 @@
 @section('content')
 <div style="background-color: #FFF5F7; min-height: 100vh; padding: 40px; font-family: 'Segoe UI', sans-serif;">
 
+    <!-- Toast Notification -->
+    @if (session('cart_added'))
+        <div id="toast" style="position: fixed; top: 24px; right: 24px; background-color: #743b3b; color: white; padding: 12px 20px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); transition: opacity 0.5s ease;">
+            Item added to cart.
+        </div>
+        <script>
+            setTimeout(() => {
+                const toast = document.getElementById('toast');
+                if (toast) toast.style.opacity = '0';
+            }, 3000);
+        </script>
+    @endif
+
     <div style="max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
 
         <!-- Product Image -->
@@ -27,8 +40,6 @@
             @endif
 
             @if ($product->stock > 0)
-                <p style="margin-top: 10px; color: #743b3b;">Only {{ $product->stock }} left in stock</p>
-
                 <form method="POST" action="{{ route('cart.add', $product->id) }}" style="margin-top: 20px;">
                     @csrf
 
@@ -52,10 +63,6 @@
                     Out of Stock
                 </div>
             @endif
-
-            <a href="{{ route('dashboard') }}" style="display: inline-block; margin-top: 30px; color: #743b3b; text-decoration: none;">
-                ← Back to Shop
-            </a>
         </div>
     </div>
 </div>
