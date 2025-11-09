@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.products.update', $product) }}" method="POST">
+        <form action="{{ route('admin.products.update', $product) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -36,10 +36,20 @@
                        class="w-full px-4 py-2 border border-rosewood rounded bg-white text-rosewood" required>
             </div>
 
-            <div class="mb-6">
+            <div class="mb-4">
                 <label for="stock" class="block text-sm text-rosewood">Stock Quantity</label>
                 <input type="number" name="stock" id="stock" value="{{ old('stock', $product->stock) }}"
                        class="w-full px-4 py-2 border border-rosewood rounded bg-white text-rosewood" required>
+            </div>
+
+            <div class="mb-6">
+                <label for="image" class="block text-sm text-rosewood">Product Image</label>
+                <input type="file" name="image" id="image"
+                       class="w-full px-4 py-2 border border-rosewood rounded bg-white text-rosewood" accept="image/*">
+                @if ($product->image)
+                    <p class="mt-2 text-sm text-rosewood">Current image:</p>
+                    <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="mt-2 rounded border border-rosewood w-full max-w-xs">
+                @endif
             </div>
 
             <button type="submit"

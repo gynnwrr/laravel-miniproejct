@@ -71,9 +71,18 @@ class ProductController extends Controller
         $data = $request->only(['name', 'description', 'price', 'stock']);
 
         if ($request->hasFile('image')) {
+            // Delete old image if it exists
+            if ($product->image && file_exists(public_path($product->image))) {
+                unlink(public_path($product->image));
+            }
+
+            // Save new image
             $filename = Str::random(20) . '.' . $request->image->getClientOriginalExtension();
             $request->image->move(public_path('images'), $filename);
             $data['image'] = 'images/' . $filename;
+        } else {
+            // Preserve existing image if no new one is uploaded
+            $data['image'] = $product->image;
         }
 
         $product->update($data);
@@ -84,7 +93,13 @@ class ProductController extends Controller
     // 🛠️ Admin: delete product
     public function destroy(Product $product)
     {
+        // Delete image file if it exists
+        if ($product->image && file_exists(public_path($product->image))) {
+            unlink(public_path($product->image));
+        }
+
         $product->delete();
+
         return back()->with('success', 'Product deleted successfully.');
     }
 
