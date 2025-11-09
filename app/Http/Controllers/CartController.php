@@ -78,11 +78,4 @@ class CartController extends Controller
 
         return redirect()->route('cart.show');
     }
-
-    // Checkout view
-    public function checkout()
-    {
-        $cart = session('cart', []);
-        return view('cart.checkout', compact('cart'));
-    }
 }

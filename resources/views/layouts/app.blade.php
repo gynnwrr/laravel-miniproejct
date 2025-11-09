@@ -20,7 +20,7 @@
     @include('layouts.navigation')
 
     <!-- Page Content -->
-    <main class="pt-20 px-4 sm:px-6 lg:px-8">
+    <main class="pt-2 px-4 sm:px-6 lg:px-8">
         @yield('content')
     </main>
 

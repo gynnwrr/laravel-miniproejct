@@ -15,7 +15,7 @@ class ProductController extends Controller
     // 🛍️ Public product listing
     public function index()
     {
-        $products = Product::latest()->paginate(12);
+        $products = Product::latest()->get();
         return view('products.index', compact('products'));
     }
 

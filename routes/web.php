@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminProductController;
+use App\Http\Controllers\AdminCustomerController;
 
 // 🌐 Public Landing Page
 Route::get('/', function () {
@@ -29,23 +30,21 @@ Route::middleware('auth')->group(function () {
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/product/{product}', [ProductController::class, 'show'])->name('products.show');
 
-
 // 🛒 Cart Routes
 Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
 Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 Route::patch('/cart/update/{product}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
-Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
 
-// 💳 Checkout Routes
-Route::post('/checkout', [CheckoutController::class, 'store'])
-    ->middleware('auth')
-    ->name('checkout.store');
-
-Route::get('/order/received', function () {
-    return view('cart.received');
-})->middleware('auth')->name('order.received');
+// 💳 Checkout Routes (Authenticated)
+Route::middleware('auth')->group(function () {
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::get('/order/received', function () {
+        return view('cart.received');
+    })->name('order.received');
+});
 
 // 🔐 Admin Login
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
@@ -61,7 +60,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::put('/products/{product}', [AdminProductController::class, 'update'])->name('products.update');
     Route::delete('/products/{product}', [AdminProductController::class, 'destroy'])->name('products.destroy');
 
-    //Customer Management
+    // 👥 Customer Management
     Route::get('/customers', [AdminCustomerController::class, 'index'])->name('customers.index');
     Route::get('/customers/create', [AdminCustomerController::class, 'create'])->name('customers.create');
     Route::post('/customers', [AdminCustomerController::class, 'store'])->name('customers.store');

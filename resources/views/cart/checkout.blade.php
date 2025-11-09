@@ -1,7 +1,10 @@
-<x-app-layout>
+@extends('layouts.app')
+
+@section('content')
     <div class="bg-nadaPink min-h-screen py-16 px-6">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:gap-20 gap-10">
-            <!-- Order Summary First -->
+
+            <!-- Order Summary -->
             <div class="flex-1 md:max-w-[400px]">
                 <h2 class="text-xl font-bold text-rosewood mb-6">Order Summary</h2>
 
@@ -26,10 +29,10 @@
                 </div>
             </div>
 
-            <!-- Shipping Details Second -->
+            <!-- Shipping Details -->
             <div class="flex-1 md:max-w-[500px]">
                 <h2 class="text-xl font-bold text-rosewood mb-6">Shipping Details</h2>
-                <form method="POST" action="#">
+                <form method="POST" action="{{ route('checkout.store') }}">
                     @csrf
 
                     <div class="space-y-5">
@@ -46,8 +49,14 @@
                         </div>
 
                         <div>
-                            <label for="address" class="block text-sm text-rosewood">Shipping Address</label>
-                            <textarea id="address" name="address" rows="3" required
+                            <label for="phone" class="block text-sm text-rosewood">Phone Number</label>
+                            <input type="text" id="phone" name="phone" required
+                                   class="w-full px-4 py-2 border border-rosewood rounded bg-white text-rosewood focus:ring-dustyBlush focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label for="shipping_address" class="block text-sm text-rosewood">Shipping Address</label>
+                            <textarea id="shipping_address" name="shipping_address" rows="3" required
                                       class="w-full px-4 py-2 border border-rosewood rounded bg-white text-rosewood focus:ring-dustyBlush focus:outline-none"></textarea>
                         </div>
 
@@ -66,4 +75,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection
