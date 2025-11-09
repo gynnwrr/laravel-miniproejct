@@ -58,7 +58,9 @@
             <form method="POST" action="{{ route('cart.clear') }}" style="margin-top: 40px; text-align: center;">
                 @csrf
                 <button type="submit"
-                        style="padding: 12px 24px; background-color: #743b3b; color: white; font-weight: 600; border: none; border-radius: 6px;">
+                        style="padding: 12px 24px; background-color: #F3D1D8; color: #743b3b; font-weight: 600; border: none; border-radius: 6px; transition: background-color 0.3s ease;"
+                        onmouseover="this.style.backgroundColor='#E8BFC8'"
+                        onmouseout="this.style.backgroundColor='#F3D1D8'">
                     Clear Cart
                 </button>
             </form>
@@ -66,10 +68,11 @@
             <!-- Checkout Button -->
             <div style="text-align: center; margin-top: 20px;">
                 <a href="{{ route('checkout') }}"
-                   style="display: inline-block; padding: 12px 24px; background-color: #D88C9A; color: white; font-weight: 600; border-radius: 6px; text-decoration: none;">
+                style="display: inline-block; padding: 14px 28px; background-color: #743b3b; color: #FFF5F7; font-weight: 700; border-radius: 6px; text-decoration: none; box-shadow: 0 2px 6px rgba(0,0,0,0.1); transition: background-color 0.3s ease;">
                     Proceed to Checkout
                 </a>
             </div>
+
         @else
             <p style="text-align: center; color: #743b3b; font-style: italic; margin-top: 20px;">
                 Your cart is empty — but your cravings are not.
