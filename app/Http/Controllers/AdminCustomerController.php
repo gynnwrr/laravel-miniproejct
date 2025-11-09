@@ -24,12 +24,16 @@ class AdminCustomerController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
         ]);
 
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'phone' => $request->phone,
+            'address' => $request->address,
             'is_admin' => false,
         ]);
 
@@ -46,9 +50,11 @@ class AdminCustomerController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $customer->id,
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
         ]);
 
-        $customer->update($request->only('name', 'email'));
+        $customer->update($request->only('name', 'email', 'phone', 'address'));
 
         return redirect()->route('admin.customers.index')->with('success', 'Customer updated successfully.');
     }
