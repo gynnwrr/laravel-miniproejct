@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('layouts.app')
+
+@section('content')
     <div class="py-8 px-6 max-w-2xl mx-auto">
         <h1 class="text-3xl font-bold text-rosewood mb-6">Edit Product</h1>
 
@@ -46,4 +48,4 @@
             </button>
         </form>
     </div>
-</x-app-layout>
+@endsection

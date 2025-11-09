@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('layouts.app')
+
+@section('content')
     <div class="py-8 px-6 max-w-2xl mx-auto">
         <h1 class="text-3xl font-bold text-rosewood mb-6">Add New Product</h1>
 
@@ -12,7 +14,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.products.store') }}" method="POST">
+        <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-4">
@@ -39,10 +41,16 @@
                        class="w-full px-4 py-2 border border-rosewood rounded bg-white text-rosewood" required>
             </div>
 
+            <div class="mb-6">
+                <label for="image" class="block text-sm text-rosewood">Product Image</label>
+                <input type="file" name="image" id="image"
+                    class="w-full px-4 py-2 border border-rosewood rounded bg-white text-rosewood" accept="image/*">
+            </div>
+
             <button type="submit"
                     class="w-full px-5 py-2 bg-rosewood text-white font-semibold rounded hover:bg-dustyBlush transition">
                 Save Product
             </button>
         </form>
     </div>
-</x-app-layout>
+@endsection

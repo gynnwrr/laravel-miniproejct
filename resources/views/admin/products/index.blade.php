@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('layouts.app')
+
+@section('content')
     <div class="py-8 px-6">
         <h1 class="text-3xl font-bold text-rosewood mb-6">Product Management</h1>
 
@@ -55,4 +57,4 @@
             {{ $products->links() }}
         </div>
     </div>
-</x-app-layout>
+@endsection

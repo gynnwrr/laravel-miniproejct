@@ -20,9 +20,9 @@
 
         <!-- Product Image -->
         <div>
-            @if($product->image && file_exists(public_path('images/' . $product->image)))
-                <img src="{{ asset('images/' . $product->image) }}" alt="{{ $product->name }}"
-                     style="width: 100%; max-height: 400px; object-fit: contain; border: 1px solid #743b3b; border-radius: 8px;">
+            @if($product->image && file_exists(public_path($product->image)))
+                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}"
+                    style="width: 100%; max-height: 400px; object-fit: contain; border: 1px solid #743b3b; border-radius: 8px;">
             @else
                 <div style="width: 100%; height: 300px; background-color: #e5e5e5; display: flex; align-items: center; justify-content: center; color: #888; border-radius: 8px;">
                     No Image Available
